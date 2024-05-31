@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    
+    <template id="print_cheque_concepto_fecha">
+        <span t-if="o.cheque_formate_id.concepto_fecha_label" t-esc="o.cheque_formate_id.concepto_fecha_label" />
+        <t t-set="date" t-value="get_date(o.write_date)" />
+        <t t-if="o.cheque_formate_id.concepto_date_formate == 'dd_mm'">
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.concepto_fecha_f_d_m_left}px;display: inline-block;">
+                <span t-esc="date[2][0]"/>
+            </div>
+
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.concepto_fecha_s_d_m_left}px;display: inline-block;">
+                <span t-esc="date[2][1]"/> 
+                <span t-esc="o.cheque_formate_id.concepto_date_seprator"/>
+            </div>
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.concepto_fecha_t_d_m_left}px;display: inline-block;">
+                <span t-esc="date[1][0]"/>
+            </div>
+
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.concepto_fecha_fo_d_m_left}px;display: inline-block;">
+                <span t-esc="date[1][1]"/> 
+                <span t-esc="o.cheque_formate_id.concepto_date_seprator"/>
+            </div>
+        </t>
+        <t t-if="o.cheque_formate_id.concepto_date_formate == 'mm_dd'">
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.concepto_fecha_f_d_m_left}px;display: inline-block;">
+                <span t-esc="date[1][0]"/>
+            </div>
+
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.concepto_fecha_s_d_m_left}px;display: inline-block;">
+                <span t-esc="date[1][1]"/> 
+                <span t-esc="o.cheque_formate_id.concepto_date_seprator"/>
+            </div>
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.concepto_fecha_t_d_m_left}px;display: inline-block;">
+                <span t-esc="date[2][0]"/>
+            </div>
+
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.concepto_fecha_fo_d_m_left}px;display: inline-block;">
+                <span t-esc="date[2][1]"/> 
+                <span t-esc="o.cheque_formate_id.concepto_date_seprator"/>
+            </div>
+        </t>
+        <t t-if="o.cheque_formate_id.concepto_year_formate == 'yy'">
+
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.concepto_fecha_fi_d_m_left}px;display: inline-block;">
+                <span t-esc="date[0][2]"/>
+            </div>
+
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.concepto_fecha_si_d_m_left}px;display: inline-block;">
+                <span t-esc="date[0][3]"/>
+            </div>
+
+        </t>
+        <t t-if="o.cheque_formate_id.concepto_year_formate == 'yyyy'">
+
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.concepto_fecha_fi_d_m_left}px;display: inline-block;">
+                <span t-esc="date[0][0]"/>
+            </div>
+
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.concepto_fecha_si_d_m_left}px;display: inline-block;">
+                <span t-esc="date[0][1]"/>
+            </div>
+
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.concepto_fecha_se_d_m_left}px;display: inline-block;">
+                <span t-esc="date[0][2]"/>
+            </div>
+
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.concepto_fecha_e_d_m_left}px;display: inline-block;">
+                <span t-esc="date[0][3]"/>
+            </div>
+
+        </t>
+    </template>
+
+    <template id="print_cheque_concepto_solicitud">
+        Solicitud No.: <span style="text-transform: capitalize" t-esc="o.name"/>
+    </template>
+
+    <template id="print_cheque_concepto_pago">
+        <!-- Concepto: <span style="text-transform: capitalize" t-esc="o.ref"/> -->
+        Concepto: <span style="text-transform: capitalize" t-esc="ref_ncf"/>
+    </template>
+
+    <template id="print_cheque_concepto_trans">
+        Trans: <span t-esc="o.id"/>
+    </template>
+
+     <template id="print_cheque_cheque_no">
+        Cheque No. <span t-esc="o.cheque_no"/>
+    </template>
+
+    <template id="print_cheque_concepto_monto">
+        <span t-if="o.cheque_formate_id.concepto_monto_label" t-esc="o.cheque_formate_id.concepto_monto_label" />
+        <t t-if="o.cheque_formate_id.is_concepto_monto_star">
+                ***
+            </t>
+            <t t-if="o.cheque_formate_id.is_concepto_monto_currency">
+                <span t-field="o.amount" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+            </t>
+            <t t-if="not o.cheque_formate_id.is_concepto_monto_currency">
+                <span t-esc="'{:,.2f}'.format(o.amount)"/>
+            </t>
+
+            <t t-if="o.cheque_formate_id.is_concepto_monto_star">
+                ***
+            </t>
+    </template>
+
+    <template id="print_cheque_date">
+        <t t-set="date" t-value="get_date(o.date)" />
+        <t t-if="o.cheque_formate_id.date_formate == 'dd_mm'">
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.f_d_m_left}px;margin-top:#{date_m_top}px;position: absolute;">
+                <span t-esc="date[2][0]"/>
+            </div>
+
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.s_d_m_left}px;margin-top:#{date_m_top}px;position: absolute;">
+                <span t-esc="date[2][1]"/> <span style="margin-left:3px" t-esc="o.cheque_formate_id.date_seprator"/>
+            </div>
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.t_d_m_left}px;margin-top:#{date_m_top}px;position: absolute;">
+                <span t-esc="date[1][0]"/>
+            </div>
+
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.fo_d_m_left}px;margin-top:#{date_m_top}px;position: absolute;">
+                <span t-esc="date[1][1]"/> <span style="margin-left:3px" t-esc="o.cheque_formate_id.date_seprator"/>
+            </div>
+        </t>
+        <t t-if="o.cheque_formate_id.date_formate == 'mm_dd'">
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.f_d_m_left}px;margin-top:#{date_m_top}px;position: absolute;">
+                <span t-esc="date[1][0]"/>
+            </div>
+
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.s_d_m_left}px;margin-top:#{date_m_top}px;position: absolute;">
+                <span t-esc="date[1][1]"/> <span style="margin-left:3px" t-esc="o.cheque_formate_id.date_seprator"/>
+            </div>
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.t_d_m_left}px;margin-top:#{date_m_top}px;position: absolute;">
+                <span t-esc="date[2][0]"/>
+            </div>
+
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.fo_d_m_left}px;margin-top:#{date_m_top}px;position: absolute;">
+                <span t-esc="date[2][1]"/> <span style="margin-left:3px" t-esc="o.cheque_formate_id.date_seprator"/>
+            </div>
+        </t>
+        <t t-if="o.cheque_formate_id.year_formate == 'yy'">
+
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.fi_d_m_left}px;margin-top:#{date_m_top}px;position: absolute;">
+                <span t-esc="date[0][2]"/>
+            </div>
+
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.si_d_m_left}px;margin-top:#{date_m_top}px;position: absolute;">
+                <span t-esc="date[0][3]"/>
+            </div>
+
+        </t>
+        <t t-if="o.cheque_formate_id.year_formate == 'yyyy'">
+
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.fi_d_m_left}px;margin-top:#{date_m_top}px;position: absolute;">
+                <span t-esc="date[0][0]"/>
+            </div>
+
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.si_d_m_left}px;margin-top:#{date_m_top}px;position: absolute;">
+                <span t-esc="date[0][1]"/>
+            </div>
+
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.se_d_m_left}px;margin-top:#{date_m_top}px;position: absolute;">
+                <span t-esc="date[0][2]"/>
+            </div>
+
+            <div t-attf-style="margin-left:#{o.cheque_formate_id.e_d_m_left}px;margin-top:#{date_m_top}px;position: absolute;">
+                <span t-esc="date[0][3]"/>
+            </div>
+
+        </t>
+    </template>
+
+</odoo>

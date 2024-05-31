@@ -1,0 +1,54 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="cheque_setting_line_list">
+      <field name="name">cheque_setting_line</field>
+      <field name="model">cheque.setting.line</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="font_size" />
+          <field name="margin_top"/>
+          <field name="margin_left"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="cheque_setting_line_form" model="ir.ui.view">
+        <field name="name">Transportes</field>
+        <field name="model">cheque.setting.line</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Transportes">
+              <sheet>
+                <group>
+                    <field name="name"/>
+                    <field name="font_size" />
+                </group>
+                <group>
+                    <field name="margin_top"/>
+                    <field name="margin_left" />
+                </group> 
+              </sheet>
+            </form>
+        </field>
+    </record>
+
+    
+    <!-- actions opening views on models -->
+    <!-- <record model="ir.actions.act_window" id="action_window_cheque_setting_line">
+      <field name="name">Transportes</field>
+      <field name="res_model">cheque.setting.line</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Mantenimiento de Transportes
+            </p><p>
+                El usuario podra crear, editar, ver y eliminar los transportes.
+            </p>
+        </field>
+    </record> -->
+
+  </data>
+</odoo>

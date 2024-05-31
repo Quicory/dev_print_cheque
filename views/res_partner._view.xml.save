@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="view_partner_form_inherit" model="ir.ui.view">
+        <field name="name">view_partner_form_inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <!-- <field name="priority" eval="20"/> -->
+        <!-- <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman'))]"/> -->
+       <field name="arch" type="xml">
+            <xpath expr="//div[@class='oe_title mb24']/div[@class='o_row']" position="after">
+                <!-- <div class="o_row"> -->
+                    <field name="commercial_name" placeholder="Nombre Comercial" />
+                <!-- </div> -->
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
