@@ -162,11 +162,15 @@ For Module Support : devintelle@gmail.com  or Skype : devintelle
                     <group string="Amount In Digit">
                         <group>
                             <field name='is_amount' />
+                            <field name='is_amount_bold' />
+                            <field name='amount_font_size' />
                             <field name="is_currency"/>
                             <field name='is_star' />
                             <field name='is_amount_repeat' />
                         </group>
                         <group>
+                            <field name='is_amount_bold_repeat' />
+                            <field name='amount_font_size_repeat' />
                             <field name='amt_m_top' string='From Top' attrs="{'required':[('is_amount','=',True)]}"/>
                             <field name='amt_m_left' string='From Left' attrs="{'required':[('is_amount','=',True)]}"/>
                             <field name='amt_m_top_repeat' string='From Top Repeat' attrs="{'required':[('is_amount_repeat','=',True)]}"/>

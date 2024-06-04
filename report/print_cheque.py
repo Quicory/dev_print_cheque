@@ -102,23 +102,25 @@ class print_check(models.AbstractModel):
             return str(footer_text)+' '+ str(cheque_num)
             
     def get_ref_ncf(self,ref):
-        refs = ref.split(' ')            
-        print(refs)
-        ncfs = ""
-        for ref in refs:
-            move = self.env['account.move'].search([('name','=',ref)],limit=1)
-            if move and move.l10n_latam_document_number:
-                if ncfs == "":
-                    ncfs = move.l10n_latam_document_number
+        try:
+            refs = ref.split(' ')
+            ncfs = ""
+            for ref in refs:
+                move = self.env['account.move'].search([('name','=',ref)],limit=1)
+                if move and move.l10n_latam_document_number:
+                    if ncfs == "":
+                        ncfs = move.l10n_latam_document_number
+                    else:
+                        ncfs += " " + move.l10n_latam_document_number
                 else:
-                    ncfs += " " + move.l10n_latam_document_number
-            else:
-                if ncfs == "":
-                    ncfs = ref
-                else:
-                    ncfs += " " + ref
+                    if ncfs == "":
+                        ncfs = ref
+                    else:
+                        ncfs += " " + ref
 
-        return ncfs
+            return ncfs
+        except:
+            return ref
 
     @api.model
     def _get_report_values(self, docids, data=None):

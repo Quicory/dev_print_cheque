@@ -177,16 +177,27 @@ For Module Support : devintelle@gmail.com  or Skype : devintelle
                     </t>
 
                     <!-- Print Amount in Digit In Cheque -->
+                    
                     <t t-if="o.cheque_formate_id.is_amount">
-                        <div t-attf-style="margin-left:#{o.cheque_formate_id.amt_m_left}px;margin-top:#{o.cheque_formate_id.amt_m_top}px;position: absolute;">
+                        <div t-attf-style="font-size:#{o.cheque_formate_id.amount_font_size}px;margin-left:#{o.cheque_formate_id.amt_m_left}px;margin-top:#{o.cheque_formate_id.amt_m_top}px;position: absolute;" >
+                            <t t-set="amount_bold" t-value="''" />
+                            <t t-if="o.cheque_formate_id.is_amount_bold" >
+                                <t t-set="amount_bold" t-value="'font-weight:bold;'" />
+                            </t>
+                            
                             <t t-if="o.cheque_formate_id.is_star">
                                 ***
                             </t>
                             <t t-if="o.cheque_formate_id.is_currency">
-                                <span t-field="o.amount" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                <span t-field="o.amount" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}' 
+                                t-attf-style="#{amount_bold}" />
+
+                                <!-- <span t-if="o.cheque_formate_id.is_amount_bold" t-field="o.amount" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}' 
+                                    style="font-weight:bold;" />
+                                 <span t-else="" t-field="o.amount" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/> -->
                             </t>
                             <t t-if="not o.cheque_formate_id.is_currency">
-                                <span t-esc="'{:,.2f}'.format(o.amount)"/>
+                                <span t-esc="'{:,.2f}'.format(o.amount)" t-attf-style="#{amount_bold}" />
                             </t>
 
                             <t t-if="o.cheque_formate_id.is_star">
@@ -194,15 +205,22 @@ For Module Support : devintelle@gmail.com  or Skype : devintelle
                             </t>
                         </div>
 
-                        <div t-if="o.cheque_formate_id.is_amount_repeat" t-attf-style="margin-left:#{o.cheque_formate_id.amt_m_left_repeat}px;margin-top:#{o.cheque_formate_id.amt_m_top_repeat}px;position: absolute;">
+                        <div t-if="o.cheque_formate_id.is_amount_repeat" t-attf-style="font-size:#{o.cheque_formate_id.amount_font_size_repeat}px;margin-left:#{o.cheque_formate_id.amt_m_left_repeat}px;margin-top:#{o.cheque_formate_id.amt_m_top_repeat}px;position: absolute;" >
+                            <t t-set="amount_bold" t-value="''" />
+                            <t t-if="o.cheque_formate_id.is_amount_bold_repeat" >
+                                <t t-set="amount_bold" t-value="'font-weight:bold;'" />
+                            </t>
+                            
                             <t t-if="o.cheque_formate_id.is_star">
                                 ***
                             </t>
                             <t t-if="o.cheque_formate_id.is_currency">
-                                <span t-field="o.amount" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                <span t-field="o.amount" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
+                                t-attf-style="#{amount_bold}" />
                             </t>
+                            <!--   -->
                             <t t-if="not o.cheque_formate_id.is_currency">
-                                <span t-esc="'{:,.2f}'.format(o.amount)"/>
+                                <span t-esc="'{:,.2f}'.format(o.amount)" t-attf-style="#{amount_bold}" />
                             </t>
 
                             <t t-if="o.cheque_formate_id.is_star">
@@ -379,11 +397,11 @@ For Module Support : devintelle@gmail.com  or Skype : devintelle
                                            <span t-field="l.partner_id.name"/>
                                         </td> -->                                       
 
-                                        <td class="text-right">
+                                        <td class="text-end">
                                            <span t-field="l.credit"
                                             t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
                                         </td>
-                                        <td class="text-right">
+                                        <td class="text-end">
                                            <span t-field="l.debit"
                                             t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
                                         </td>

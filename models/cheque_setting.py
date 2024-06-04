@@ -58,9 +58,14 @@ class cheque_setting(models.Model):
     amt_m_top = fields.Float('Amt From Top', default=185)
     amt_m_left = fields.Float('Amt From Left', default=550)
     is_star = fields.Boolean('Print Star', help="if true then print 3 star before and after Amount", default=False)
+    is_amount_bold = fields.Boolean('Font Bold')
+    amount_font_size = fields.Float('Font Size', default="13")
+
     is_amount_repeat = fields.Boolean('Repetir', default=False)
     amt_m_top_repeat = fields.Float('Margin top (px)', default=0)
     amt_m_left_repeat = fields.Float('Margin left (px)', default=0)
+    is_amount_bold_repeat = fields.Boolean('Font Bold')
+    amount_font_size_repeat = fields.Float('Font Size', default="13")
 
     is_currency = fields.Boolean('Print Currency')
 
